@@ -162,8 +162,20 @@ while flag_menu_navegação:
             print("\t\tC ►  Deleção de Produtos")
             
             print()
-            print("********** Beatriz: copiar seu código aqui ********** ")
-            print()
+            cadastrar_alimento = "s"
+            alimento = {
+            "Nome": "",
+            "Código": "",
+            "Valor": ""
+
+            }
+
+            alimento ["Nome"] = str(input("Qual alimento gostaria de cadastrar? "))
+            alimento ["Código"] = int(input("Qual o código do alimento? "))
+            alimento ["Valor"] = float(input("Qual o valor do produto? "))
+
+            while cadastrar_alimento == "s":
+                cadastrar_alimento = input("Deseja cadastrar mais um alimento? / (s ou n) ")
 
             print("\n\t\tV ►  Voltar ao menu de Cadastro")
             print("\t\tS ►  S A I R   D O   S I S T E M A")
