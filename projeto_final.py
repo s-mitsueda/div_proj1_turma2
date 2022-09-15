@@ -51,7 +51,7 @@ while flag_menu_navegação:
 
     qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
     qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
     # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
     espaço1=(tamanho_linha-len(title1))//2-1
     espaço2=(tamanho_linha-len(title2))//2-1
@@ -67,7 +67,7 @@ while flag_menu_navegação:
     print("\t\tA ►  CADASTRO")
     print("\t\tB ►  VENDAS")
     print("\n\t\tS ►  S A I R   D O   S I S T E M A")
- 
+
     opção=input("\n\t\tOpção desejada: ").lower().strip()
 
     if opção=="a":
@@ -84,14 +84,14 @@ while flag_menu_navegação:
     while flag_menu_cadastro:
         os.system("cls")
         data_hora=datetime.now() # Recebe a data e a hora atual
-    
+
         title1="••• M Ó D U L O   D E   C A D A S T R O •••"
         title2=""
         tamanho_linha =73 
 
         qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
         qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
         # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
         espaço1=(tamanho_linha-len(title1))//2-1
         espaço2=(tamanho_linha-len(title2))//2-1
@@ -108,9 +108,9 @@ while flag_menu_navegação:
         print("\t\tC ►  Delação de Produtos")
         print("\n\t\tN ►  Voltar ao Menu de Navegação")
         print("\t\tS ►  S A I R   D O   S I S T E M A")
-    
+
         opção=input("\n\t\tOpção desejada: ").lower().strip()
-  
+
         if opção=="a":
             flag_item_3A=True
             flag_item_3C=False
@@ -135,7 +135,7 @@ while flag_menu_navegação:
             flag_menu_cadastro=False
             flag_menu_vendas=False
             flag_menu_navegação=False
-    
+
 
         while flag_item_3A:
             os.system("cls")
@@ -147,7 +147,7 @@ while flag_menu_navegação:
 
             qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
             qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
             # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
             espaço1=(tamanho_linha-len(title1))//2-1
             espaço2=(tamanho_linha-len(title2))//2-1
@@ -166,12 +166,12 @@ while flag_menu_navegação:
             print()
             print("********** Beatriz: copiar seu código aqui ********** ")
             print()
-                       
+
             print("\n\t\tV ►  Voltar ao menu de Cadastro")
             print("\t\tS ►  S A I R   D O   S I S T E M A")
 
             opção=input("\n\t\tOpção desejada: ").lower().strip()
-        
+
             if opção=="v": 
                 flag_item_3A=False
                 flag_item_3C=False
@@ -186,7 +186,7 @@ while flag_menu_navegação:
                 flag_menu_vendas=False
                 flag_menu_navegação=False
 
-        
+
         while flag_item_3C:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
@@ -197,7 +197,7 @@ while flag_menu_navegação:
 
             qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
             qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
             # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
             espaço1=(tamanho_linha-len(title1))//2-1
             espaço2=(tamanho_linha-len(title2))//2-1
@@ -216,12 +216,12 @@ while flag_menu_navegação:
             print()
             print("********** Ettore: copiar seu código aqui ********** ")
             print()
-                       
+
             print("\n\t\tV ►  Voltar ao menu de Cadastro")
             print("\t\tS ►  S A I R   D O   S I S T E M A")
 
             opção=input("\n\t\tOpção desejada: ").lower().strip()
-        
+
             if opção=="v": 
                 flag_item_3A=False
                 flag_item_3C=False
@@ -235,19 +235,19 @@ while flag_menu_navegação:
                 flag_menu_cadastro=False
                 flag_menu_vendas=False
                 flag_menu_navegação=False
-        
+
 
     while flag_menu_vendas:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
-            
+
             title1="••• M Ó D U L O   D E   V E N D A S •••"
             title2=""
             tamanho_linha =73 
 
             qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
             qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
             # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
             espaço1=(tamanho_linha-len(title1))//2-1
             espaço2=(tamanho_linha-len(title2))//2-1
@@ -264,9 +264,9 @@ while flag_menu_navegação:
             print("\t\tC ►  Finalização da venda do carrinho")
             print("\n\t\tN ►  Voltar ao menu de Navegação")
             print("\t\tS ►  S A I R   D O   S I S T E M A")
-    
+
             opção=input("\n\t\tOpção desejada: ").lower().strip()
-    
+
             if opção=="a":
                 flag_item_4A=True
                 flag_item_4C=False
@@ -302,7 +302,7 @@ while flag_menu_navegação:
 
                 qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
                 qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
                 # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
                 espaço1=(tamanho_linha-len(title1))//2-1
                 espaço2=(tamanho_linha-len(title2))//2-1
@@ -317,7 +317,7 @@ while flag_menu_navegação:
 
                 print("\033[;7m"+"\t\tA ►  Adição de produtos ao carrinho" +"\033[0;0m")
                 print("\t\tC ►  Finalização da venda do carrinho")
-                
+
                 print()
                 print("********** Raissa: copiar seu código aqui ********** ")
                 print()
@@ -326,7 +326,7 @@ while flag_menu_navegação:
                 print("\t\tS ►  S A I R   D O   S I S T E M A")
 
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
-        
+
                 if opção=="v": 
                     flag_item_4A=False
                     flag_item_4C=False
@@ -341,7 +341,7 @@ while flag_menu_navegação:
                     flag_menu_vendas=False
                     flag_menu_navegação=False
 
-            
+
             while flag_item_4C:
                 os.system("cls")
                 data_hora=datetime.now() # Recebe a data e a hora atual
@@ -352,7 +352,7 @@ while flag_menu_navegação:
 
                 qtd_caracter_data=len(data_hora.strftime("%d/%m/%Y"))
                 qtd_caracter_hora=len(data_hora.strftime("%H:%M"))
-    
+
                 # Qtd de aracteres para calcular o posicionamento dos títulos, data e hora
                 espaço1=(tamanho_linha-len(title1))//2-1
                 espaço2=(tamanho_linha-len(title2))//2-1
@@ -381,7 +381,7 @@ while flag_menu_navegação:
                     {"Código":5, "Nome": "Goiaba", "Preço": 12.0,"Quantidade": 1},
                     {"Código":6, "Nome": "Pitanga", "Preço": 14.0,"Quantidade": 1},
                     {"Código":7, "Nome": "Café", "Preço": 20.0,"Quantidade": 9},]   
-                
+
                 total=0
                 for produto in itens_carrinho:
                     codigo = produto["Código"]
@@ -394,28 +394,28 @@ while flag_menu_navegação:
                 print("\t\t"+"-"*42)
                 print(F"\t\tTotal do carrinho:\t\tR$ {total:.02f}")
                 print()
-                
+
                 print("\033[93m \t\tF ►  Finalizar compras do carrinho\033[m")
 
                 print("\t\tV ►  Voltar ao menu de Vendas")
                 print("\t\tS ►  S A I R   D O   S I S T E M A")
 
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
-        
+
                 if opção=="f":
                     itens_carrinho=[]
-        
+
                     msg1="C O M P R A S   R E A L I Z A D A S   C O M  S U C E S S O"
                     msg2="V O C Ê   C O M P R O U :  R$ "
                     msg3="O   C A R I N H O   D E   C O M P R A S   S E R Á   E S V A Z I A D O"
                     msg4="R E T O R N A N D O   A O   M Ó D U L O   D E  V E N D A S"
                     tamanho_linha=73
-                    
+
                     espaço1=(tamanho_linha-len(msg1))//2-1
                     espaço2=(tamanho_linha-len(msg2)-len(str(total)))//2-1
                     espaço3=(tamanho_linha-len(msg3))//2-1
                     espaço4=(tamanho_linha-len(msg4))//2-1
-                    
+
                     sleep(0.5)
                     print("\n","-"*tamanho_linha)
                     sleep(0.5)
