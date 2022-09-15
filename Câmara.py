@@ -1,6 +1,6 @@
 import os
 import csv
-from re import S
+from re import A, S
 from datetime import datetime
 from time import sleep
 
@@ -40,9 +40,6 @@ flag_item_3C=False
 flag_menu_vendas=False       
 flag_item_4A=False          
 flag_item_4C=False          
-
-
-os.system("cls")
 
 while flag_menu_navegação:
     os.system("cls")
@@ -189,6 +186,7 @@ while flag_menu_navegação:
                 flag_menu_vendas=False
                 flag_menu_navegação=False
 
+        
         while flag_item_3C:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
@@ -343,6 +341,7 @@ while flag_menu_navegação:
                     flag_menu_vendas=False
                     flag_menu_navegação=False
 
+            
             while flag_item_4C:
                 os.system("cls")
                 data_hora=datetime.now() # Recebe a data e a hora atual
@@ -369,6 +368,11 @@ while flag_menu_navegação:
                 print("\t\tA ►  Adição de produtos ao carrinho")
                 print("\033[;7m"+"\t\tC ►  Finalização da venda do carrinho"+"\033[0;0m")
 
+                print()
+                print("\t\t\t"+"••• CARRINHO DE COMPRAS •••")
+                print("\t\t"+"-"*42)
+                print("\t\tCódigo\tProduto\t  Qtd Comprada\tPreço Unit")
+
                 itens_carrinho=[
                     {"Código":1, "Nome": "Açaí", "Preço": 25.0,"Quantidade": 1},
                     {"Código":2, "Nome": "Lichia", "Preço": 28.0,"Quantidade": 2},
@@ -376,29 +380,62 @@ while flag_menu_navegação:
                     {"Código":4, "Nome": "Kiwi", "Preço": 24.0,"Quantidade": 2},
                     {"Código":5, "Nome": "Goiaba", "Preço": 12.0,"Quantidade": 1},
                     {"Código":6, "Nome": "Pitanga", "Preço": 14.0,"Quantidade": 1},
-                    {"Código":7, "Nome": "Café", "Preço": 20.0,"Quantidade": 10},]   
-                print()
-                print("\t\tCARRINHO DE COMPRAS")
-                print("\t\t------------------------------------")
-                print("\t\tCódigo\tProduto\t\tPreço\tQuantidade")
-
-
-                total = 0
-                for produto in itens_carrinho:
-                    codigo = produto['Código']
-                    nome = produto['Nome']
-                    preco = produto['Preço']
-                    quantidade = produto['Quantidade']
-                    total += (preco*quantidade)
-                    print(f'\t\t{codigo}\t{nome}\t\t{preco}\t{quantidade}')
+                    {"Código":7, "Nome": "Café", "Preço": 20.0,"Quantidade": 9},]   
                 
-                print(f'Total:\t\t\t\t\t\t{total}')
+                total=0
+                for produto in itens_carrinho:
+                    codigo = produto["Código"]
+                    nome = produto["Nome"]
+                    preco = produto["Preço"]
+                    quantidade = produto["Quantidade"]
+                    total += (preco*quantidade)
+                    print(F"\t\t  {codigo}\t{nome}\t       {quantidade}\tR$  {preco:.02f}")
 
-                print("\n\t\tV ►  Voltar ao menu de Vendas")
+                print("\t\t"+"-"*42)
+                print(F"\t\tTotal do carrinho:\t\tR$ {total:.02f}")
+                print()
+                
+                print("\033[93m \t\tF ►  Finalizar compras do carrinho\033[m")
+
+                print("\t\tV ►  Voltar ao menu de Vendas")
                 print("\t\tS ►  S A I R   D O   S I S T E M A")
 
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
         
+                if opção=="f":
+                    itens_carrinho=[]
+        
+                    msg1="C O M P R A S   R E A L I Z A D A S   C O M  S U C E S S O"
+                    msg2="V O C Ê   C O M P R O U :  R$ "
+                    msg3="O   C A R I N H O   D E   C O M P R A S   S E R Á   E S V A Z I A D O"
+                    msg4="R E T O R N A N D O   A O   M Ó D U L O   D E  V E N D A S"
+                    tamanho_linha=73
+                    
+                    espaço1=(tamanho_linha-len(msg1))//2-1
+                    espaço2=(tamanho_linha-len(msg2)-len(str(total)))//2-1
+                    espaço3=(tamanho_linha-len(msg3))//2-1
+                    espaço4=(tamanho_linha-len(msg4))//2-1
+                    
+                    sleep(0.5)
+                    print("\n","-"*tamanho_linha)
+                    sleep(0.5)
+                    print(" "*espaço1, "\033[93m", msg1,"\033[m","\n")
+                    sleep(0.5)
+                    espaço2=" "*espaço2
+                    print(F"{espaço2} \033[93m {msg2} {total:.2f} \033[m \n")
+                    sleep(0.5)
+                    print(" "*espaço3, msg3)
+                    sleep(0.5)
+                    print(" "*espaço4, msg4)
+                    sleep(0.5)
+                    print("-"*tamanho_linha)
+                    sleep(3.5)
+
+                    flag_item_4A=False
+                    flag_item_4C=False
+                    flag_item_3A=False
+                    flag_item_3C=False
+
                 if opção=="v": 
                     flag_item_4A=False
                     flag_item_4C=False
@@ -412,6 +449,5 @@ while flag_menu_navegação:
                     flag_menu_cadastro=False
                     flag_menu_vendas=False
                     flag_menu_navegação=False
-
 
 print("\nP R O G R A M A   E N C E R R A D O\n")
