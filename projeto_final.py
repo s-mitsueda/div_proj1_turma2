@@ -4,6 +4,28 @@ from time import sleep
 
 os.system("cls")
 
+# lista de produtos cadastrados
+produtos = [
+    # {
+    #     "Nome": "Arroz",
+    #     "Código": 0,
+    #     "Valor": 5
+    # }
+]
+
+# função para listar produtos cadastrados
+def lista_produtos():
+    print(f"{' Produtos ':=^45}")
+    print("")
+    if len(produtos) == 0:
+        print("Não há produtos cadastrados.")
+    else:
+        print(f"{'Código':>6} | {'Nome':20} | {'Preço':13}")
+        print(f"{'-' * 45}")
+        for produto in produtos:
+            print(f"{produtos.index(produto):>6} | {produto['Nome']:20} | R$ {produto['Valor']:<10.2f}")
+    print("")
+
 # Tela de abertura do prograna
 title1="••• O R G Â N I C O ' S •••"
 title2="C o o p e r a t i v a   d e   P r o d u t o r e s"
@@ -102,6 +124,8 @@ while flag_menu_navegação:
 
         print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+        lista_produtos()
+
         print("\t\tA ►  Cadastramento de Produtos")
         print("\t\tC ►  Delação de Produtos")
         print("\n\t\tN ►  Voltar ao Menu de Navegação")
@@ -157,6 +181,8 @@ while flag_menu_navegação:
             print("-"*tamanho_linha)
 
             print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
+
+            lista_produtos()
 
             print("\033[;7m"+"\t\tA ►  Cadastramento de Produtos"+"\033[m")
             print("\t\tC ►  Deleção de Produtos")
@@ -220,31 +246,52 @@ while flag_menu_navegação:
 
             print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+            lista_produtos()
+
             print("\t\tA ►  Cadastramento de Produtos")
             print("\033[;7m"+"\t\tC ►  Deleção de Produtos"+"\033[0;0m")
-            
-            print()
-            print("********** Ettore: copiar seu código aqui ********** ")
             print()
 
-            print("\n\t\tV ►  Voltar ao menu de Cadastro")
-            print("\t\tS ►  S A I R   D O   S I S T E M A")
+            id = int(input("Código do produto a ser deletado: "))
+            try:
+                produtos[id]
+            except:
+                print("")
+                input("Produto com este código não encontrado.")
+                flag_item_3C = False
+            else:
+                print("")
+                print(f"{'Nome:':6} {produtos[id]['Nome']}")
+                print(f"{'Preço:':6} R$ {produtos[id]['Valor']:<10.2f}")
+                print("")
+                confirma = input("Confirma a deleção do produto acima? (s/N) ")
+                match confirma.upper():
+                    case "S":
+                        produtos.pop(id)
+                        input("Deleção concluída.")
+                        flag_item_3C = False
+                    case _:
+                        input("Deleção cancelada.")
+                        flag_item_3C = False
 
-            opção=input("\n\t\tOpção desejada: ").lower().strip()
+            # print("\n\t\tV ►  Voltar ao menu de Cadastro")
+            # print("\t\tS ►  S A I R   D O   S I S T E M A")
 
-            if opção=="v": 
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_item_4A=False
-                flag_item_4C=False                
-            elif opção=="s":
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_item_4A=False
-                flag_item_4C=False                
-                flag_menu_cadastro=False
-                flag_menu_vendas=False
-                flag_menu_navegação=False
+            # opção=input("\n\t\tOpção desejada: ").lower().strip()
+
+            # if opção=="v": 
+            #     flag_item_3A=False
+            #     flag_item_3C=False
+            #     flag_item_4A=False
+            #     flag_item_4C=False                
+            # elif opção=="s":
+            #     flag_item_3A=False
+            #     flag_item_3C=False
+            #     flag_item_4A=False
+            #     flag_item_4C=False                
+            #     flag_menu_cadastro=False
+            #     flag_menu_vendas=False
+            #     flag_menu_navegação=False
 
 
     while flag_menu_vendas:
@@ -460,4 +507,4 @@ while flag_menu_navegação:
                     flag_menu_vendas=False
                     flag_menu_navegação=False
 
-print("\nP R O G R A M A   E N C E R R A D O\n")
+input("\nP R O G R A M A   E N C E R R A D O")
