@@ -6,11 +6,14 @@ os.system("cls")
 
 # lista de produtos cadastrados
 produtos = [
-    # {
-    #     "Nome": "Arroz",
-    #     "Código": 0,
-    #     "Valor": 5
-    # }
+    {
+        "Nome": "Arroz",
+        "Valor": 5
+    },
+    {
+        "Nome": "Feijão",
+        "Valor": 4
+    }
 ]
 
 # função para listar produtos cadastrados
