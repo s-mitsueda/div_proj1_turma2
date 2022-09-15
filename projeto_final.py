@@ -1,6 +1,4 @@
 import os
-import csv
-from re import A, S
 from datetime import datetime
 from time import sleep
 
