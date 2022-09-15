@@ -20,7 +20,7 @@ def lista_produtos():
     if len(produtos) == 0:
         print("Não há produtos cadastrados.")
     else:
-        print(f"{'Código':>6} | {'Nome':20} | {'Preço':13}")
+        print(f"{'ID':>6} | {'Nome':20} | {'Preço':13}")
         print(f"{'-' * 45}")
         for produto in produtos:
             print(f"{produtos.index(produto):>6} | {produto['Nome']:20} | R$ {produto['Valor']:<10.2f}")
