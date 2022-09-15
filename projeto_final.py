@@ -4,7 +4,7 @@ from time import sleep
 
 os.system("cls")
 
-# lista de produtos cadastrados
+# (Ettore) lista de produtos cadastrados
 produtos = [
     {
         "Nome": "Arroz",
@@ -16,7 +16,7 @@ produtos = [
     }
 ]
 
-# função para listar produtos cadastrados
+# (Ettore) função para listar produtos cadastrados
 def lista_produtos():
     print(f"{' Produtos ':=^45}")
     print("")
@@ -255,6 +255,7 @@ while flag_menu_navegação:
             print("\033[;7m"+"\t\tC ►  Deleção de Produtos"+"\033[0;0m")
             print()
 
+            # (Ettore) funcionalidade de deleção/descadastramento de produtos
             id = int(input("Código do produto a ser deletado: "))
             try:
                 produtos[id]
