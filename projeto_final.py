@@ -127,8 +127,6 @@ while flag_menu_navegação:
 
         print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
-        lista_produtos()
-
         print("\t\tA ►  Cadastramento de Produtos")
         print("\t\tC ►  Delação de Produtos")
         print("\n\t\tN ►  Voltar ao Menu de Navegação")
@@ -184,8 +182,6 @@ while flag_menu_navegação:
             print("-"*tamanho_linha)
 
             print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
-
-            lista_produtos()
 
             print("\033[;7m"+"\t\tA ►  Cadastramento de Produtos"+"\033[m")
             print("\t\tC ►  Deleção de Produtos")
