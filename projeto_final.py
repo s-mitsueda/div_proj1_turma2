@@ -515,7 +515,7 @@ while flag_menu_navegação:
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
 
                 if opção=="f":
-                    itens_carrinho=[]
+                    carrinho=[]
 
                     msg1="C O M P R A S   R E A L I Z A D A S   C O M  S U C E S S O"
                     msg2="V O C Ê   C O M P R O U :  R$ "
