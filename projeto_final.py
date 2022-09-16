@@ -7,12 +7,39 @@ os.system("cls")
 # (Ettore) lista de produtos cadastrados
 produtos = [
     {
-        "Nome": "Arroz",
-        "Valor": 5
+        "nome": "Jenipapo",
+        "preço": 25
     },
     {
-        "Nome": "Feijão",
-        "Valor": 4
+        "nome": "Lichia",
+        "preço": 28
+    },
+    {
+        "nome": "Pitaya",
+        "preço": 30
+    },
+    {
+        "nome": "Kiwi",
+        "preço": 24
+    },
+    {
+        "nome": "Goiaba",
+        "preço": 12
+    },
+    {
+        "nome": "Pitanga",
+        "preço": 14
+    },
+    {
+        "nome": "Café",
+        "preço": 20
+    },
+]
+carrinho = [
+    {
+        "nome": "Café",
+        "preço": 20,
+        "quantidade": 2
     }
 ]
 
@@ -26,7 +53,7 @@ def lista_produtos():
         print(f"{'ID':>6} | {'Nome':20} | {'Preço':13}")
         print(f"{'-' * 45}")
         for produto in produtos:
-            print(f"{produtos.index(produto):>6} | {produto['Nome']:20} | R$ {produto['Valor']:<10.2f}")
+            print(f"{produtos.index(produto):>6} | {produto['nome']:20} | R$ {produto['preço']:<10.2f}")
     print("")
 
 # Tela de abertura do prograna
@@ -127,6 +154,8 @@ while flag_menu_navegação:
 
         print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+        lista_produtos()
+
         print("\t\tA ►  Cadastramento de Produtos")
         print("\t\tC ►  Delação de Produtos")
         print("\n\t\tN ►  Voltar ao Menu de Navegação")
@@ -183,23 +212,19 @@ while flag_menu_navegação:
 
             print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+            lista_produtos()
+
             print("\033[;7m"+"\t\tA ►  Cadastramento de Produtos"+"\033[m")
             print("\t\tC ►  Deleção de Produtos")
             
             print()
             cadastrar_alimento = "s"
-            alimento = {
-            "Nome": "",
-            "Código": "",
-            "Valor": ""
-
-            }
-
-            alimento ["Nome"] = str(input("Qual alimento gostaria de cadastrar? "))
-            alimento ["Código"] = int(input("Qual o código do alimento? "))
-            alimento ["Valor"] = float(input("Qual o valor do produto? "))
-
             while cadastrar_alimento == "s":
+                alimento = {
+                    "nome": input("Qual alimento gostaria de cadastrar? "),
+                    "preço": float(input("Qual o valor do produto? "))
+                }
+                produtos.append(alimento)
                 cadastrar_alimento = input("Deseja cadastrar mais um alimento? / (s ou n) ")
 
             print("\n\t\tV ►  Voltar ao menu de Cadastro")
@@ -261,8 +286,8 @@ while flag_menu_navegação:
                 flag_item_3C = False
             else:
                 print("")
-                print(f"{'Nome:':6} {produtos[id]['Nome']}")
-                print(f"{'Preço:':6} R$ {produtos[id]['Valor']:<10.2f}")
+                print(f"{'Nome:':6} {produtos[id]['nome']}")
+                print(f"{'Preço:':6} R$ {produtos[id]['preço']:<10.2f}")
                 print("")
                 confirma = input("Confirma a deleção do produto acima? (s/N) ")
                 match confirma.upper():
@@ -372,66 +397,51 @@ while flag_menu_navegação:
 
                 print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+                lista_produtos()
+
                 print("\033[;7m"+"\t\tA ►  Adição de produtos ao carrinho" +"\033[0;0m")
                 print("\t\tC ►  Finalização da venda do carrinho")
 
- #RAISSA
-                
-                produtos2 = [{'codigo': 1, 'nome': 'Jenipapo', 'preco': 25,
-                'codigo': 2, 'nome': 'Lichia', 'preco': 28,
-                'codigo': 3, 'nome': 'Pitaya', 'preco': 30,
-                'codigo': 4, 'nome': 'Kiwi', 'preco': 24,
-                'codigo': 5, 'nome': 'Goiaba', 'preco': 12,
-                'codigo': 6, 'nome': 'Pitanga', 'preco': 14,
-                'codigo': 7, 'nome': 'Café', 'preco': 20}]
-
-                #dicionário vazio do carrinho
-                carrinho = {}
-
+                #RAISSA
                 opcao = 0
                 flag_item_4A = True
 
                 while flag_item_4A == True:
-   
-                    os.system('cls')
                     print('===Carrinho de Compras=== \n')
                     print('1 - Adicionar Item')
                     print('2 - Remover Item')
                     print('3 - Ver itens do carrinho')
                     opcao = int(input('Digite a opção: '))
-    
-       
+
                     if opcao == 1:
-                        produto = input('Digite o nome do produto: ').title()
-                        quantidade = int(input('Digite quantidade: '))
-                        carrinho[produto] = quantidade
-                        flag_item_4A = False
-                        menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
-                        if menu == 'S':
-                            flag_item_4A = True
-        
-        
-                    if opcao == 2:
-                        print(carrinho)
-                        produto = input('Digite o nome do produto: ').title()
-                        carrinho.pop(produto)
-                        for key, value in carrinho.items():
-                            print(key, ' : ', carrinho[key])
+                        produto = produtos[int(input("Digite o ID do produto: "))].copy()
+                        produto["quantidade"] = int(input("Digite quantidade: "))
+                        carrinho.append(produto)
                         flag_item_4A = False
                         menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
                         if menu == 'S':
                             flag_item_4A = True
 
-    
-                    if opcao == 3:
-                        for key, value in carrinho.items():
-                            print(key, ' : ', carrinho[key])
+                    if opcao == 2:
+                        for produto in carrinho:
+                            print(carrinho.index(produto))
+                            print(produto)
+                        id = int(input('Digite o ID do produto: '))
+                        carrinho.pop(id)
                         flag_item_4A = False
                         menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
                         if menu == 'S':
                             flag_item_4A = True
-            
-            # FIM RAISSA #
+
+                    if opcao == 3:
+                        for produto in carrinho:
+                            print(carrinho.index(produto))
+                            print(produto)
+                        flag_item_4A = False
+                        menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
+                        if menu == 'S':
+                            flag_item_4A = True
+                # FIM RAISSA #
 
                 print("\n\t\tV ►  Voltar ao menu de Vendas")
                 print("\t\tS ►  S A I R   D O   S I S T E M A")
@@ -482,23 +492,14 @@ while flag_menu_navegação:
                 print()
                 print("\t\t\t"+"••• CARRINHO DE COMPRAS •••")
                 print("\t\t"+"-"*42)
-                print("\t\tCódigo\tProduto\t  Qtd Comprada\tPreço Unit")
-
-                itens_carrinho=[
-                    {"Código":1, "Nome": "Açaí", "Preço": 25.0,"Quantidade": 1},
-                    {"Código":2, "Nome": "Lichia", "Preço": 28.0,"Quantidade": 2},
-                    {"Código":3, "Nome": "Pitaya", "Preço": 30.0,"Quantidade": 1},
-                    {"Código":4, "Nome": "Kiwi", "Preço": 24.0,"Quantidade": 2},
-                    {"Código":5, "Nome": "Goiaba", "Preço": 12.0,"Quantidade": 1},
-                    {"Código":6, "Nome": "Pitanga", "Preço": 14.0,"Quantidade": 1},
-                    {"Código":7, "Nome": "Café", "Preço": 20.0,"Quantidade": 9},]   
+                print("\t\tCódigo\tProduto\t  Qtd Comprada\tPreço Unit") 
 
                 total=0
-                for produto in itens_carrinho:
-                    codigo = produto["Código"]
-                    nome = produto["Nome"]
-                    preco = produto["Preço"]
-                    quantidade = produto["Quantidade"]
+                for produto in carrinho:
+                    codigo = carrinho.index(produto)
+                    nome = produto["nome"]
+                    preco = produto["preço"]
+                    quantidade = produto["quantidade"]
                     total += (preco*quantidade)
                     print(F"\t\t  {codigo}\t{nome}\t       {quantidade}\tR$  {preco:.02f}")
 
@@ -514,7 +515,7 @@ while flag_menu_navegação:
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
 
                 if opção=="f":
-                    itens_carrinho=[]
+                    carrinho=[]
 
                     msg1="C O M P R A S   R E A L I Z A D A S   C O M  S U C E S S O"
                     msg2="V O C Ê   C O M P R O U :  R$ "
