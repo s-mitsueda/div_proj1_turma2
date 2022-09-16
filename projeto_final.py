@@ -7,12 +7,12 @@ os.system("cls")
 # (Ettore) lista de produtos cadastrados
 produtos = [
     {
-        "Nome": "Arroz",
-        "Valor": 5
+        "nome": "Arroz",
+        "preço": 5
     },
     {
-        "Nome": "Feijão",
-        "Valor": 4
+        "nome": "Feijão",
+        "preço": 4
     }
 ]
 
@@ -26,7 +26,7 @@ def lista_produtos():
         print(f"{'ID':>6} | {'Nome':20} | {'Preço':13}")
         print(f"{'-' * 45}")
         for produto in produtos:
-            print(f"{produtos.index(produto):>6} | {produto['Nome']:20} | R$ {produto['Valor']:<10.2f}")
+            print(f"{produtos.index(produto):>6} | {produto['nome']:20} | R$ {produto['preço']:<10.2f}")
     print("")
 
 # Tela de abertura do prograna
@@ -127,6 +127,8 @@ while flag_menu_navegação:
 
         print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+        lista_produtos()
+
         print("\t\tA ►  Cadastramento de Produtos")
         print("\t\tC ►  Delação de Produtos")
         print("\n\t\tN ►  Voltar ao Menu de Navegação")
@@ -183,23 +185,19 @@ while flag_menu_navegação:
 
             print(data_hora.strftime("%d/%m/%Y")+" "*espaço3+data_hora.strftime("%H:%M"),"\n")
 
+            lista_produtos()
+
             print("\033[;7m"+"\t\tA ►  Cadastramento de Produtos"+"\033[m")
             print("\t\tC ►  Deleção de Produtos")
             
             print()
             cadastrar_alimento = "s"
-            alimento = {
-            "Nome": "",
-            "Código": "",
-            "Valor": ""
-
-            }
-
-            alimento ["Nome"] = str(input("Qual alimento gostaria de cadastrar? "))
-            alimento ["Código"] = int(input("Qual o código do alimento? "))
-            alimento ["Valor"] = float(input("Qual o valor do produto? "))
-
             while cadastrar_alimento == "s":
+                alimento = {
+                    "nome": input("Qual alimento gostaria de cadastrar? "),
+                    "preço": float(input("Qual o valor do produto? "))
+                }
+                produtos.append(alimento)
                 cadastrar_alimento = input("Deseja cadastrar mais um alimento? / (s ou n) ")
 
             print("\n\t\tV ►  Voltar ao menu de Cadastro")
@@ -261,8 +259,8 @@ while flag_menu_navegação:
                 flag_item_3C = False
             else:
                 print("")
-                print(f"{'Nome:':6} {produtos[id]['Nome']}")
-                print(f"{'Preço:':6} R$ {produtos[id]['Valor']:<10.2f}")
+                print(f"{'Nome:':6} {produtos[id]['nome']}")
+                print(f"{'Preço:':6} R$ {produtos[id]['preço']:<10.2f}")
                 print("")
                 confirma = input("Confirma a deleção do produto acima? (s/N) ")
                 match confirma.upper():
