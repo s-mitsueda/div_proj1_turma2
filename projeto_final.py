@@ -35,7 +35,13 @@ produtos = [
         "preço": 20
     },
 ]
-carrinho = []
+carrinho = [
+    {
+        "nome": "Café",
+        "preço": 20,
+        "quantidade": 2
+    }
+]
 
 # (Ettore) função para listar produtos cadastrados
 def lista_produtos():
@@ -486,23 +492,14 @@ while flag_menu_navegação:
                 print()
                 print("\t\t\t"+"••• CARRINHO DE COMPRAS •••")
                 print("\t\t"+"-"*42)
-                print("\t\tCódigo\tProduto\t  Qtd Comprada\tPreço Unit")
-
-                itens_carrinho=[
-                    {"Código":1, "Nome": "Açaí", "Preço": 25.0,"Quantidade": 1},
-                    {"Código":2, "Nome": "Lichia", "Preço": 28.0,"Quantidade": 2},
-                    {"Código":3, "Nome": "Pitaya", "Preço": 30.0,"Quantidade": 1},
-                    {"Código":4, "Nome": "Kiwi", "Preço": 24.0,"Quantidade": 2},
-                    {"Código":5, "Nome": "Goiaba", "Preço": 12.0,"Quantidade": 1},
-                    {"Código":6, "Nome": "Pitanga", "Preço": 14.0,"Quantidade": 1},
-                    {"Código":7, "Nome": "Café", "Preço": 20.0,"Quantidade": 9},]   
+                print("\t\tCódigo\tProduto\t  Qtd Comprada\tPreço Unit") 
 
                 total=0
-                for produto in itens_carrinho:
-                    codigo = produto["Código"]
-                    nome = produto["Nome"]
-                    preco = produto["Preço"]
-                    quantidade = produto["Quantidade"]
+                for produto in carrinho:
+                    codigo = carrinho.index(produto)
+                    nome = produto["nome"]
+                    preco = produto["preço"]
+                    quantidade = produto["quantidade"]
                     total += (preco*quantidade)
                     print(F"\t\t  {codigo}\t{nome}\t       {quantidade}\tR$  {preco:.02f}")
 
