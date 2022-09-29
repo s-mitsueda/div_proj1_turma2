@@ -4,6 +4,12 @@ from time import sleep
 
 os.system("cls")
 
+# liga / desliga os comandos while
+programa_ligado = True
+opcao_principal = 0    # 0 = nenhum menu, 1 = menu de cadastro,   2 = menu de vendas
+opcao_cadastro  = 0    # 0 = nenhum menu, 1 = cadastrar produto,  2 = descadastrar produto
+opcao_vendas    = 0    # 0 = nenhum menu, 1 = gerenciar carrinho, 2 = finalizar compra
+
 # (Ettore) lista de produtos cadastrados
 produtos = [    {"nome": "Jenipapo","preço": 25},
                 {"nome": "Lichia","preço": 28},
@@ -31,6 +37,13 @@ def lista_produtos():
             print(F"{produtos.index(produto):>21}   {produto['nome']:.<18} R$   {produto['preço']:5.2f}")
         print()
 
+# (Ettore) função para sair do programa
+def sair():
+    super.programa_ligado = False
+    super.opcao_principal = 0
+    super.opcao_cadastro  = 0
+    super.opcao_vendas    = 0
+
 # Tela de abertura do prograna
 title1="••• O R G Â N I C O ' S •••"
 title2="C o o p e r a t i v a   d e   P r o d u t o r e s"
@@ -52,16 +65,7 @@ print("|"," "*espaço3, title3," "*espaço3,"|")
 print("-"*linha)
 sleep(8)
 
-# liga / desliga os comandos while 
-flag_menu_navegação=True  
-flag_menu_cadastro=False     
-flag_item_3A=False          
-flag_item_3C=False          
-flag_menu_vendas=False       
-flag_item_4A=False          
-flag_item_4C=False          
-
-while flag_menu_navegação:
+while programa_ligado:
     os.system("cls")
     data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -75,17 +79,13 @@ while flag_menu_navegação:
     opção=input("\n\t\tOpção desejada: ").lower().strip()
 
     if opção=="a":
-        flag_menu_cadastro=True
-        flag_menu_vendas=False
+        opcao_principal = 1
     elif opção=="b": 
-        flag_menu_cadastro=False
-        flag_menu_vendas=True
+        opcao_principal = 2
     elif opção=="s":
-        flag_menu_cadastro=False
-        flag_menu_vendas=False
-        flag_menu_navegação=False
+        sair()
 
-    while flag_menu_cadastro:
+    while opcao_principal == 1:
         os.system("cls")
         data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -102,32 +102,17 @@ while flag_menu_navegação:
         opção=input("\n\t\tOpção desejada: ").lower().strip()
 
         if opção=="a":
-            flag_item_3A=True
-            flag_item_3C=False
-            flag_item_4A=False
-            flag_item_4C=False
+            opcao_cadastro = 1
         elif opção=="c": 
-            flag_item_3A=False
-            flag_item_3C=True
-            flag_item_4A=False
-            flag_item_4C=False
+            opcao_cadastro = 2
         elif opção=="n":
-            flag_item_3A=False
-            flag_item_3C=False
-            flag_item_4A=False
-            flag_item_4C=False
-            flag_menu_cadastro=False
+            opcao_cadastro = 0
+            opcao_principal = 0
         elif opção=="s":
-            flag_item_3A=False
-            flag_item_3C=False
-            flag_item_4A=False
-            flag_item_4C=False
-            flag_menu_cadastro=False
-            flag_menu_vendas=False
-            flag_menu_navegação=False
+            sair()
 
 
-        while flag_item_3A:
+        while opcao_cadastro == 1:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
             
@@ -153,21 +138,12 @@ while flag_menu_navegação:
             opção=input("\n\t\tOpção desejada: ").lower().strip()
 
             if opção=="v": 
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_item_4A=False
-                flag_item_4C=False
+                opcao_cadastro = 0
             elif opção=="s":
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_item_4A=False
-                flag_item_4C=False
-                flag_menu_cadastro=False
-                flag_menu_vendas=False
-                flag_menu_navegação=False
+                sair()
 
 
-        while flag_item_3C:
+        while opcao_cadastro == 2:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -187,7 +163,7 @@ while flag_menu_navegação:
             except:
                 print("")
                 input("Produto com este código não encontrado.")
-                flag_item_3C = False
+                opcao_cadastro = 0
             else:
                 print("")
                 print(f"{'Nome:':6} {produtos[id]['nome']}")
@@ -198,32 +174,12 @@ while flag_menu_navegação:
                     case "S":
                         produtos.pop(id)
                         input("Deleção concluída.")
-                        flag_item_3C = False
                     case _:
                         input("Deleção cancelada.")
-                        flag_item_3C = False
-
-            # print("\n\t\tV ►  Voltar ao menu de Cadastro")
-            # print("\t\tS ►  S A I R   D O   S I S T E M A")
-
-            # opção=input("\n\t\tOpção desejada: ").lower().strip()
-
-            # if opção=="v": 
-            #     flag_item_3A=False
-            #     flag_item_3C=False
-            #     flag_item_4A=False
-            #     flag_item_4C=False                
-            # elif opção=="s":
-            #     flag_item_3A=False
-            #     flag_item_3C=False
-            #     flag_item_4A=False
-            #     flag_item_4C=False                
-            #     flag_menu_cadastro=False
-            #     flag_menu_vendas=False
-            #     flag_menu_navegação=False
+                opcao_cadastro = 0
 
 
-    while flag_menu_vendas:
+    while opcao_principal == 2:
             os.system("cls")
             data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -241,31 +197,16 @@ while flag_menu_navegação:
             opção=input("\n\t\tOpção desejada: ").lower().strip()
 
             if opção=="a":
-                flag_item_4A=True
-                flag_item_4C=False
-                flag_item_3A=False
-                flag_item_3C=False
+                opcao_vendas = 1
             elif opção=="c": 
-                flag_item_4A=False
-                flag_item_4C=True 
-                flag_item_3A=False
-                flag_item_3C=False
+                opcao_vendas = 2
             elif opção=="n":
-                flag_item_4A=False
-                flag_item_4C=False
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_menu_vendas=False
+                opcao_vendas = 0
+                opcao_principal = 0
             elif opção=="s":
-                flag_item_4A=False
-                flag_item_4C=False
-                flag_item_3A=False
-                flag_item_3C=False
-                flag_menu_cadastro=False
-                flag_menu_vendas=False
-                flag_menu_navegação=False
+                sair()
 
-            while flag_item_4A:
+            while opcao_vendas == 1:
                 os.system("cls")
                 data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -280,43 +221,41 @@ while flag_menu_navegação:
 
                 #RAISSA
                 opcao = 0
-                flag_item_4A = True
 
-                while flag_item_4A == True:
-                    print('===Carrinho de Compras=== \n')
-                    print('1 - Adicionar Item')
-                    print('2 - Remover Item')
-                    print('3 - Ver itens do carrinho')
-                    opcao = int(input('Digite a opção: '))
+                print('===Carrinho de Compras=== \n')
+                print('1 - Adicionar Item')
+                print('2 - Remover Item')
+                print('3 - Ver itens do carrinho')
+                opcao = int(input('Digite a opção: '))
 
-                    if opcao == 1:
-                        produto = produtos[int(input("Digite o ID do produto: "))].copy()
-                        produto["quantidade"] = int(input("Digite quantidade: "))
-                        carrinho.append(produto)
-                        flag_item_4A = False
-                        menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
-                        if menu == 'S':
-                            flag_item_4A = True
+                if opcao == 1:
+                    produto = produtos[int(input("Digite o ID do produto: "))].copy()
+                    produto["quantidade"] = int(input("Digite quantidade: "))
+                    carrinho.append(produto)
+                    opcao_vendas = 0
+                    menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
+                    if menu == 'S':
+                        opcao_vendas = 1
 
-                    if opcao == 2:
-                        for produto in carrinho:
-                            print(carrinho.index(produto))
-                            print(produto)
-                        id = int(input('Digite o ID do produto: '))
-                        carrinho.pop(id)
-                        flag_item_4A = False
-                        menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
-                        if menu == 'S':
-                            flag_item_4A = True
+                if opcao == 2:
+                    for produto in carrinho:
+                        print(carrinho.index(produto))
+                        print(produto)
+                    id = int(input('Digite o ID do produto: '))
+                    carrinho.pop(id)
+                    opcao_vendas = 0
+                    menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
+                    if menu == 'S':
+                        opcao_vendas = 1
 
-                    if opcao == 3:
-                        for produto in carrinho:
-                            print(carrinho.index(produto))
-                            print(produto)
-                        flag_item_4A = False
-                        menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
-                        if menu == 'S':
-                            flag_item_4A = True
+                if opcao == 3:
+                    for produto in carrinho:
+                        print(carrinho.index(produto))
+                        print(produto)
+                    opcao_vendas = 0
+                    menu = input('Deseja voltar ao menu do carrinho de compras? S ou N: ').title()
+                    if menu == 'S':
+                        opcao_vendas = 1
                 # FIM RAISSA #
 
                 print("\n\t\tV ►  Voltar ao menu de Vendas")
@@ -325,21 +264,12 @@ while flag_menu_navegação:
                 opção=input("\n\t\tOpção desejada: ").lower().strip()
 
                 if opção=="v": 
-                    flag_item_4A=False
-                    flag_item_4C=False
-                    flag_item_3A=False
-                    flag_item_3C=False
+                    opcao_vendas = 0
                 elif opção=="s":
-                    flag_item_4A=False
-                    flag_item_4C=False
-                    flag_item_3A=False
-                    flag_item_3C=False
-                    flag_menu_cadastro=False
-                    flag_menu_vendas=False
-                    flag_menu_navegação=False
+                    sair()
 
 
-            while flag_item_4C:
+            while opcao_vendas == 2:
                 os.system("cls")
                 data_hora=datetime.now() # Recebe a data e a hora atual
 
@@ -402,22 +332,11 @@ while flag_menu_navegação:
                     print("-"*linha)
                     sleep(5)
 
-                    flag_item_4A=False
-                    flag_item_4C=True
-                    flag_item_3A=False
-                    flag_item_3C=False
+                    opcao_vendas = 0
+
                 if opção=="v": 
-                    flag_item_4A=False
-                    flag_item_4C=False
-                    flag_item_3A=False
-                    flag_item_3C=False
+                    opcao_vendas = 0
                 elif opção=="s":
-                    flag_item_4A=False
-                    flag_item_4C=False
-                    flag_item_3A=False
-                    flag_item_3C=False
-                    flag_menu_cadastro=False
-                    flag_menu_vendas=False
-                    flag_menu_navegação=False
+                    sair()
 
 input("\nP R O G R A M A   E N C E R R A D O")
