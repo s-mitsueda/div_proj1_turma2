@@ -1,0 +1,34 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	font-family: monospace;
+	font-size: 16px;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.col_id		{width: 3rem;}
+.col_nome	{width: 6rem;}
+.col_preco	{width: 6rem;}
+
+thead {
+	background-color: #333333;
+	color: #FFFFFF;
+}
+
+tbody tr:nth-of-type(even) {
+	background-color: #EEEEEE;
+}
+
+th, td {
+	padding: 0.25rem 0.5rem;
+	font-weight: normal;
+}
+
+.cell_int	{text-align: end;}
+.cell_str	{text-align: start;}

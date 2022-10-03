@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+
+{% block titulo %}Menu de Cadastro{% endblock %}
+
+{% block main %}
+<table>
+	<colgroup>
+		<col class="col_id">
+		<col class="col_nome">
+		<col class="col_preco">
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col" class="cell_int">ID</th>
+			<th scope="col" class="cell_str">Nome</th>
+			<th scope="col" class="cell_int">Preço</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if df.empty %}
+		<tr>
+			<td class="cell_int">—</td>
+			<td class="cell_str">—</td>
+			<td class="cell_int">—</td>
+		</tr>
+		{% else %}
+		{% for row in df.itertuples() %}
+		<tr>
+			<td class="cell_int">{{ row[0] }}</td>
+			<th scope="row" class="cell_str">{{ row[1] }}</th>
+			<td class="cell_int">{{ "{:.2f}".format(row[2]) }}</td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+	</tbody>
+</table>
+{% endblock %}
