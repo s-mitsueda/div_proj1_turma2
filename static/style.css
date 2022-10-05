@@ -1,15 +1,43 @@
 * {
 	box-sizing: border-box;
+	font-family: monospace;
 }
 
 :root {
-	font-family: monospace;
 	font-size: 16px;
 }
 
+body {
+	display: grid;
+		grid-template-columns: 1fr max-content;
+		gap: 1rem;
+	width: max-content;
+	height: 100%;
+	padding: 1rem;
+	margin: 0 auto;
+}
+
+div {
+	width: max-content;
+}
+
+/* FORMULÁRIOS */
+form {
+	width: max-content;
+}
+
+select {
+	width: 6rem;
+}
+
+/* TABELAS */
 table {
 	border-collapse: collapse;
-	margin: 0 auto;
+}
+
+caption {
+	margin-bottom: 0.75rem;
+	font-weight: bold;
 }
 
 .col_id		{width: 3rem;}
