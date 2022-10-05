@@ -1,0 +1,62 @@
+* {
+	box-sizing: border-box;
+	font-family: monospace;
+}
+
+:root {
+	font-size: 16px;
+}
+
+body {
+	display: grid;
+		grid-template-columns: 1fr max-content;
+		gap: 1rem;
+	width: max-content;
+	height: 100%;
+	padding: 1rem;
+	margin: 0 auto;
+}
+
+div {
+	width: max-content;
+}
+
+/* FORMULÁRIOS */
+form {
+	width: max-content;
+}
+
+select {
+	width: 6rem;
+}
+
+/* TABELAS */
+table {
+	border-collapse: collapse;
+}
+
+caption {
+	margin-bottom: 0.75rem;
+	font-weight: bold;
+}
+
+.col_id		{width: 3rem;}
+.col_nome	{width: 6rem;}
+.col_preco	{width: 6rem;}
+
+thead {
+	background-color: #333333;
+	color: #FFFFFF;
+}
+
+tbody tr:nth-of-type(even) {
+	background-color: #EEEEEE;
+}
+
+th, td {
+	padding: 0.25rem 0.5rem;
+	font-weight: normal;
+}
+
+.cell_int	{text-align: end;}
+.cell_str	{text-align: start;}
