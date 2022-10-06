@@ -1,6 +1,6 @@
-<form name="form_descadastro" action="/cadastro/descadastrar/" method="post">
-	<label for="selectDescadastro">Produto a descadastrar: 
-		<select name="a_descadastrar" id="selectDescadastro" required="True">
+<form id="form_descadastro" action="/cadastro/descadastrar/" method="post">
+	<label for="select_descadastro">Produto a descadastrar: 
+		<select name="nome_produto" id="select_descadastro" required="True">
 			<option value="">—</option>
 			{% if produtos.empty == False %}
 			{% for row in produtos.itertuples() %}
