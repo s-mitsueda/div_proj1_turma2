@@ -12,5 +12,6 @@ def menu_cadastro():
 @app.route("/cadastro/descadastrar/", methods=["POST"])
 def descadastrar():
 	produtos.drop(request.form.get("a_descadastrar"), inplace=True)
+	# produtos.to_csv("Produtos.csv")
 
 	return redirect(url_for("menu_cadastro"))
