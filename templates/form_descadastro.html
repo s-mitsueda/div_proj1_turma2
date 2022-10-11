@@ -1,10 +1,10 @@
 <form id="form_descadastro" action="/cadastro/descadastrar/" method="post">
 	<label for="select_descadastro">Produto a descadastrar: 
-		<select name="nome_produto" id="select_descadastro" required="True">
+		<select name="id_produto" id="select_descadastro" required="True">
 			<option value="">—</option>
 			{% if produtos.empty == False %}
 			{% for row in produtos.itertuples() %}
-			<option>{{ row[0] }}</option>
+			<option value="{{ row[0] }}">{{ row[1] }}</option>
 			{% endfor %}
 			{% endif %}
 		</select>

@@ -22,9 +22,9 @@
 		{% else %}
 		{% for row in produtos.itertuples() %}
 		<tr>
-			<td class="cell_int">{{ row[1] }}</td>
-			<th scope="row" class="cell_str">{{ row[0] }}</th>
-			<td class="cell_int">{{ "{:.2f}".format(row[2]) }}</td>
+			<td class="cell_int">{{ row[0] }}</td>
+			<th scope="row" class="cell_str">{{ row[1] }}</th>
+			<td class="cell_int">{{ row[2] }}</td>
 		</tr>
 		{% endfor %}
 		{% endif %}

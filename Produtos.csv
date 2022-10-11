@@ -1,8 +1,8 @@
-Código,Nome,Preço
-1,Jenipapo,25.0
-2,Lichia,28.0
-3,Pitaya,30.0
-4,Kiwi,24.0
-5,Goiaba,12.0
-6,Pitanga,14.0
-7,Café,20.0
+nome,valor,disponivel,valor_vendas,qtd_vendas
+Jenipapo,25.00,True,0.00,0
+Lichia,28.00,True,0.00,0
+Pitaya,30.00,True,0.00,0
+Kiwi,24.00,True,0.00,0
+Goiaba,12.00,True,0.00,0
+Pitanga,14.00,True,0.00,0
+Café,20.00,True,0.00,0
