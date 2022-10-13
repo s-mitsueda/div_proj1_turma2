@@ -81,7 +81,7 @@ def carrinho():
 
 	produtos = []
 
-	with open('Carrinho.csv', 'r') as file:
+	with open('Carrinho.csv', 'r', encoding="utf8") as file:
 		# LENDO COMO CSV
 		carrinho = csv.reader(file, delimiter=',')
 		
