@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
 * {
 	box-sizing: border-box;
-	font-family: monospace;
+	font-family: 'Open Sans', sans-serif;;
 }
 
 :root {
@@ -9,8 +12,8 @@
 
 body {
 	display: grid;
-		grid-template-columns: 1fr max-content;
-		gap: 1rem;
+	grid-template-columns: 1fr max-content;
+	gap: 1rem;
 	width: max-content;
 	height: 100%;
 	padding: 1rem;
@@ -40,9 +43,17 @@ caption {
 	font-weight: bold;
 }
 
-.col_id		{width: 3rem;}
-.col_nome	{width: 6rem;}
-.col_preco	{width: 6rem;}
+.col_id {
+	width: 3rem;
+}
+
+.col_nome {
+	width: 6rem;
+}
+
+.col_preco {
+	width: 6rem;
+}
 
 thead,
 tfoot th {
@@ -63,3 +74,75 @@ th, td {
 .cell_num	{text-align: end;}
 .cell_str	{text-align: start;}
 .cell_cen	{text-align: center;}
+
+/* MÓDULO CARRINHO */
+.links a {
+	font-weight: bold;
+	font-size: 1.35rem;
+	text-decoration: none;
+	color: #b22415;
+	transition-duration: 250ms;
+}
+
+.links a:hover {
+	color: #ff1f06;
+}
+
+.links {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+#tabela-carrinho .produto .quantidade { 
+	text-align: center;	
+}
+
+#tabela-carrinho .produto .preco,
+#tabela-carrinho .produto .total,
+#carrinho-valor-total {
+	text-align: right;
+}
+
+.carrinho-total td {
+	font-weight: bold;
+}
+
+#carrinho-valor-total {
+	text-align: right;
+}
+
+nav .logo img {
+	width: 500px;
+}
+
+input[type='submit'].finalizar-compra {
+	background-color: #b22415;
+	font-weight: bold;
+	color: white;
+	border-radius: 1rem;
+	padding: 1rem;
+	border: 0;
+	transition: 250ms;
+}
+input[type='submit']:hover.finalizar-compra {
+	background-color: #ff1f06;
+}
+
+@media (max-width:550px) {
+	body {
+		width: 100%;
+		margin: 0 0 0 0;
+		padding: 1rem;
+	}
+	nav div {
+		width: calc(100vw - 2rem);
+	}
+	nav .logo img {
+		width: calc(100vw - 2rem);
+	}
+
+	* {
+		font-size: 10px;
+	}
+}

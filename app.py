@@ -1,8 +1,10 @@
 import decimal
 from flask import Flask, render_template, redirect, request, url_for
 import pandas as pd
+import csv
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 df_dtypes = {
 	"nome": "string",
@@ -22,8 +24,7 @@ def menu_inicial():
 	
 	Talvez possa incluir o logo, uma mensagem de boas-vindas, e links para as outras páginas.
 	"""
-
-	pass
+	return redirect('/carrinho')
 
 @app.route("/cadastro/")
 def menu_cadastro():
@@ -67,3 +68,70 @@ def menu_vendas():
 	"""
 
 	pass
+
+@app.route("/carrinho", methods=['GET'])
+def carrinho():
+	def formatar_preco(preco, quantidade):
+		total = preco * int(quantidade)
+
+		preco = f'{preco:.02f}'.replace('.', ',')
+		preco = f'R$ {preco}'
+
+		return preco, total
+
+	produtos = []
+
+	with open('Carrinho.csv', 'r') as file:
+		# LENDO COMO CSV
+		carrinho = csv.reader(file, delimiter=',')
+		
+		# PULANDO HEADER
+		next(carrinho, None)
+
+		# PASSANDO POR CADA LINHA DO ARQUIVO
+		for produto in carrinho:
+			# DEFININDO COLUNAS
+			codigo = produto[0]
+			nome = produto[1]
+			preco = float(produto[2])
+			quantidade = produto[3]
+
+			# FORMATANDO PREÇO
+			preco, total_produto = formatar_preco(preco, quantidade)
+
+			# ADICIONANDO À LISTA DE PRODUTOS
+			produtos.append({
+				"codigo": codigo,
+				"nome": nome,
+				"preco": preco,
+				"quantidade": quantidade,
+				"total": total_produto 
+			})
+
+	#RENDERIZANDO PÁGINA
+	return render_template("carrinho.html", produtos=produtos, aguardando_pagamento=False)
+
+@app.route("/carrinho", methods=['POST'])
+def efetuar_compra():
+	forma_de_pagamento = request.form.get('forma-de-pagamento')
+	print(forma_de_pagamento)
+	if forma_de_pagamento:
+		# LIMPANDO CARRINHO
+		with open('Carrinho.csv', 'w') as file:
+			file.truncate()
+	
+		return render_template("carrinho.html", forma_de_pagamento=forma_de_pagamento)
+	return redirect(url_for('carrinho'))
+
+@app.route("/carrinho/delete/<int:id>", methods=['POST'])
+def deletar_do_carrinho(id):
+	# FILTRANDO ID INSERIDO
+	df = pd.read_csv('Carrinho.csv')
+	df = df[df["Código"] != id]
+
+	# ESCREVENDO NOVA LISTA
+	df.to_csv('Carrinho.csv', index=False)
+	return redirect(url_for('carrinho'))
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
