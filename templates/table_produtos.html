@@ -4,29 +4,46 @@
 		<col class="col_id">
 		<col class="col_nome">
 		<col class="col_preco">
+		<col class="col_disponibilidade">
+		<col class="col_preco_total">
+		<col class="col_quantidade_total">
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col" class="cell_int">ID</th>
+			<th scope="col" class="cell_num">ID</th>
 			<th scope="col" class="cell_str">Nome</th>
-			<th scope="col" class="cell_int">Preço</th>
+			<th scope="col" class="cell_num">Preço</th>
+			<th scope="col" class="cell_str">Disponibilidade</th>
+			<th scope="col" class="cell_num">Vendas (Unid.)</th>
+			<th scope="col" class="cell_num">Vendas (Valor)</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% if produtos.empty %}
 		<tr>
-			<td class="cell_int">—</td>
+			<td class="cell_num">—</td>
 			<td class="cell_str">—</td>
-			<td class="cell_int">—</td>
+			<td class="cell_num">—</td>
+			<td class="cell_cen">—</td>
+			<td class="cell_num">—</td>
+			<td class="cell_num">—</td>
 		</tr>
 		{% else %}
 		{% for row in produtos.itertuples() %}
 		<tr>
-			<td class="cell_int">{{ row[1] }}</td>
-			<th scope="row" class="cell_str">{{ row[0] }}</th>
-			<td class="cell_int">{{ "{:.2f}".format(row[2]) }}</td>
+			<td class="cell_num">{{ row[0] }}</td>
+			<th scope="row" class="cell_str">{{ row[1] }}</th>
+			<td class="cell_num">{{ row[2] }}</td>
+			<td class="cell_cen">{{ "Disponível" if row[3] else "Indisponível" }}</td>
+			<td class="cell_num">{{ row[4] }}</td>
+			<td class="cell_num">{{ row[5] }}</td>
 		</tr>
 		{% endfor %}
 		{% endif %}
 	</tbody>
+	<tfoot>
+		<th scope="row" colspan="4" class="cell_cen">TOTAL</th>
+		<td class="cell_num">{{ produtos["qtd_vendas"].sum() }}</td>
+		<td class="cell_num">{{ produtos["valor_vendas"].sum() }}</td>
+	</tfoot>
 </table>

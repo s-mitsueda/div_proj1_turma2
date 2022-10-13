@@ -1,3 +1,4 @@
+import decimal
 from flask import Flask, render_template, redirect, request, url_for
 import pandas as pd
 import csv
@@ -5,7 +6,17 @@ import csv
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-produtos = pd.read_csv("Produtos.csv", index_col="Nome")
+df_dtypes = {
+	"nome": "string",
+	"disponivel": "boolean",
+	"qtd_vendas": "int64"
+	}
+df_converters = {
+	"valor": decimal.Decimal,
+	"valor_vendas": decimal.Decimal
+	}
+
+produtos = pd.read_csv("produtos.csv", dtype=df_dtypes, converters=df_converters)
 
 @app.route("/")
 def menu_inicial():
@@ -37,13 +48,13 @@ def cadastrar():
 
 @app.route("/cadastro/descadastrar/", methods=["POST"])
 def descadastrar():
-	"""Remove um produto do banco de dados de produtos cadastrados.
+	"""Marca a disponibilidade de um produto no banco de dados como `False`.
 	
-	O formulário de descadastro na página `/cadastro/` envia uma request `POST` com o nome do produto a ser descadastrado. `DataFrame.drop()` é usado para remover as informações do produto do banco de dados, e `DataFrame.to_csv()` atualiza o arquivo do banco de dados. Finalmente, retorna para a página `/cadastro/`.
+	O formulário de descadastro na página `/cadastro/` envia uma request `POST` com o index a ser descadastrado. `DataFrame.at[]` é usado para marcar a disponibilidade do produto como `False` no banco de dados, e `DataFrame.to_csv()` atualiza o arquivo do banco de dados. Finalmente, retorna para a página `/cadastro/`.
 	"""
 
-	produtos.drop(request.form.get("nome_produto"), inplace=True)
-	# produtos.to_csv("Produtos.csv")
+	produtos.at[request.form.get("id_produto", type=int), "disponivel"] = False
+	produtos.to_csv("produtos.csv", index=False)
 
 	return redirect(url_for("menu_cadastro"))
 
@@ -70,7 +81,7 @@ def carrinho():
 
 	produtos = []
 
-	with open('Carrinho.csv', 'r') as file:
+	with open('Carrinho.csv', 'r', encoding="utf8") as file:
 		# LENDO COMO CSV
 		carrinho = csv.reader(file, delimiter=',')
 		
