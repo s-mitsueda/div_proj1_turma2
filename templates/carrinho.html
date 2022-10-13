@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+
+{% block titulo %}Carrinho{% endblock titulo %}
+
+{% block main %}
+
+<table id="tabela-carrinho">
+<thead>
+    <tr>
+        <th>Remover</th>
+        <th>Cód.</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Total</th>
+    </tr>
+</thead>
+
+    {% for produto in produtos %}
+    <form action="{{url_for('deletar_do_carrinho', id=produto['codigo'])}}" method="POST">
+        <tr class="produto" produto_id="{{produto['codigo']}}">
+            <td><input type="submit" value="X"></td>
+            <td class="codigo">{{produto['codigo']}}</td>
+            <td class="nome">{{produto['nome']}}</td>
+            <td class="preco">{{produto['preco']}}</td>
+            <td class="quantidade">
+                <button type="button" onclick="decrementar({{produto['codigo']}})">-</button>
+                <span>{{produto['quantidade']}}</span>
+                <button type="button" onclick="incrementar({{produto['codigo']}})">+</button>
+            </td>
+            <td class="total">{{produto['total']}}</td>
+        </tr>
+    </form>
+    {% endfor %}
+
+    <tr class="carrinho-total">
+        <td>Total:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="carrinho-valor-total">{{total}}</td>
+    </tr>
+</table>
+<br />
+{% if forma_de_pagamento %}
+<h3 style="text-align: center; width:100%;">Aguardando seu pagamento.</h3>
+<br />
+{% endif %}
+
+{% if forma_de_pagamento == 'pix' %}
+<div style="display: flex; width:100%; justify-content:center">
+    <img src="{{url_for('static', filename='images/qr_code.png')}}" style="text-align: center;width: 300px;">    
+</div>
+{% elif forma_de_pagamento == 'boleto' %}
+<div style="display: flex; width:100%; justify-content:center">
+    <img src="{{url_for('static', filename='images/bar_code.png')}}" style="text-align: center; width: 300px;">    
+</div>
+{% else %}
+<form action="/carrinho" method="POST" style="width: 100%;justify-content: center;display: flex;flex-flow: column;">
+    <h3 style="text-align: center;">Forma de Pagamento</h3>
+    <br />
+    <div class="formas-de-pagamento" style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+        <div style="justify-content: center;align-items: center;display: flex;">
+            <input type="radio" name="forma-de-pagamento" value="pix" id="pix"/>
+            <label for="pix">
+                <img src="{{url_for('static', filename='images/pix.svg')}}" alt="" style="width: 100px;">
+            </label>
+        </div>
+        <br />
+        <div style="justify-content: center;align-items: center;display: flex;">
+            <input type="radio" name="forma-de-pagamento" value="boleto" id="boleto"/>
+            <label for="boleto">
+                <img src="{{url_for('static', filename='images/boleto.svg')}}" alt="" style="width: 100px;">
+            </label>
+            
+        </div>
+    </div>
+    <br />
+    <input type="submit" class="finalizar-compra" value="Finalizar Compra" />
+    
+</form>
+{% endif %}
+
+<script src="{{url_for('static', filename='carrinho.js')}}"></script>
+{% endblock main %}
