@@ -44,12 +44,14 @@ caption {
 .col_nome	{width: 6rem;}
 .col_preco	{width: 6rem;}
 
-thead {
+thead,
+tfoot th {
 	background-color: #333333;
 	color: #FFFFFF;
 }
 
-tbody tr:nth-of-type(even) {
+tbody tr:nth-of-type(even),
+tfoot td {
 	background-color: #EEEEEE;
 }
 
@@ -58,5 +60,6 @@ th, td {
 	font-weight: normal;
 }
 
-.cell_int	{text-align: end;}
+.cell_num	{text-align: end;}
 .cell_str	{text-align: start;}
+.cell_cen	{text-align: center;}

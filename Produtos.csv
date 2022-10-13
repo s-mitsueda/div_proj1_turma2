@@ -1,8 +1,8 @@
-nome,valor,disponivel,valor_vendas,qtd_vendas
-Jenipapo,25.00,True,0.00,0
-Lichia,28.00,True,0.00,0
-Pitaya,30.00,True,0.00,0
-Kiwi,24.00,True,0.00,0
-Goiaba,12.00,True,0.00,0
-Pitanga,14.00,True,0.00,0
-Café,20.00,True,0.00,0
+nome,valor,disponivel,qtd_vendas,valor_vendas
+Jenipapo,25.00,True,2,50.00
+Lichia,28.00,True,0,0.00
+Pitaya,30.00,True,0,0.00
+Kiwi,24.00,True,3,72.00
+Goiaba,12.00,True,0,0.00
+Pitanga,14.00,True,0,0.00
+Café,20.00,False,0,0.00
