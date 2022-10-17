@@ -13,18 +13,9 @@
     <link rel="manifest" href="{{url_for('static', filename='favicon/manifest.json')}}">
 </head>
 <body>
-	<nav>
-		<div class="logo">
-			<img src="{{url_for('static', filename='images/logo.png')}}" alt="">
-		</div>
-		<div class="links">
-			<a href="{{url_for('menu_inicial')}}">Início</a>
-			<a href="{{url_for('cadastrar')}}">Cadastro</a>
-			<a href="{{url_for('carrinho')}}">Carrinho</a>
-		</div>
-	</nav>
-	<br />
-	{% block main %}
-	{% endblock %}
+	{% include "nav.html" %}
+	<main class="{% block mainclass %}{% endblock %}">
+		{% block main %}{% endblock %}
+	</main>
 </body>
 </html>
