@@ -1,23 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
+/* Todos os elementos */
 * {
 	box-sizing: border-box;
-	font-family: 'Open Sans', sans-serif;;
+	font-family: 'Open Sans', sans-serif;
 }
 
 :root {
 	font-size: 16px;
 }
 
+/* Corpo da página (_base.html) */
 body {
 	display: grid;
-	grid-template-columns: 1fr max-content;
-	gap: 1rem;
-	width: max-content;
+		grid-template-rows: max-content 1fr;
+	width: 100%;
 	height: 100%;
-	padding: 1rem;
-	margin: 0 auto;
+	margin: 0;
+}
+
+/* Menu de navegação (nav.html) */
+.nav_menu {
+	display: grid;
+		grid-template-rows: max-content 1fr;
+		grid-template-columns: repeat(4, max-content);
+		grid-template-areas:
+			"logo  .     .     .    "
+			"link1 link2 link3 link4";
+		justify-items: end;
+		gap: 0 1.5rem;
+	padding: 0.5rem;
+		padding-bottom: 0.25rem;
+	border-bottom: 2px solid #237223;
+}
+.nav_menu_logo {
+	grid-area: logo;
+	height: 3.125rem;
+}
+.nav_menu_list {
+	display: contents;
+}
+.nav_menu_list li {
+	display: block;
+}
+.nav_menu_list a {
+	color: #B22415;
+	font-weight: bold;
+	font-size: 1.1rem;
+	text-decoration: none;
+	transition-duration: 200ms;
+}
+.nav_menu_list a:hover {
+	color: #FF1F06;
+}
+.nav_menu_link_1 {grid-area: link1}
+.nav_menu_link_2 {grid-area: link2}
+.nav_menu_link_3 {grid-area: link3}
+.nav_menu_link_4 {grid-area: link4}
+
+/* Conteúdo principal da página */
+main {
+	margin: 1rem;
+}
+.main_cadastro {
+	display: grid;
+		grid-template-columns: repeat(2, 1fr);
 }
 
 div {
@@ -43,17 +91,9 @@ caption {
 	font-weight: bold;
 }
 
-.col_id {
-	width: 3rem;
-}
-
-.col_nome {
-	width: 6rem;
-}
-
-.col_preco {
-	width: 6rem;
-}
+.col_id		{width: 3rem;}
+.col_nome	{width: 6rem;}
+.col_preco	{width: 6rem;}
 
 thead,
 tfoot th {
@@ -94,8 +134,12 @@ th, td {
 	width: 100%;
 }
 
+#tabela-carrinho {
+	margin: 0 auto;
+}
+
 #tabela-carrinho .produto .quantidade { 
-	text-align: center;	
+	text-align: center;
 }
 
 #tabela-carrinho .produto .preco,
@@ -110,10 +154,6 @@ th, td {
 
 #carrinho-valor-total {
 	text-align: right;
-}
-
-nav .logo img {
-	width: 500px;
 }
 
 input[type='submit'].finalizar-compra {
@@ -134,12 +174,6 @@ input[type='submit']:hover.finalizar-compra {
 		width: 100%;
 		margin: 0 0 0 0;
 		padding: 1rem;
-	}
-	nav div {
-		width: calc(100vw - 2rem);
-	}
-	nav .logo img {
-		width: calc(100vw - 2rem);
 	}
 
 	* {
