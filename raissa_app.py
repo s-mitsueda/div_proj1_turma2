@@ -5,7 +5,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-serie = pd.read_csv('produtosCarrinho.csv')
+serie = pd.read_csv('raissa_carrinho.csv')
 print(serie)
 
 @app.route('/')
@@ -16,7 +16,7 @@ def carrinhoDeCompras():
 def comprar():
     argumentos = request.args.to_dict()
     result = pd.concat([serie, pd.Series(argumentos).to_frame().T])
-    result.to_csv('produtosCarrinho.csv', index=False)
+    result.to_csv('raissa_carrinho.csv', index=False)
 
     print(result)
     return redirect(url_for("carrinhoDeCompras"))
