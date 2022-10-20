@@ -4,6 +4,13 @@
 
 {% block main %}
 
+<h2 class="modulo">CARRINHO</h1>
+
+{% if forma_de_pagamento %}
+<h5 style="text-align: center; width:100%;">Seu carrinho está vazio.</h3>
+<h3 style="text-align: center; width:100%;">Aguardando pagamento.</h3>
+<br />
+{% else %}
 <table id="tabela-carrinho">
 <thead>
     <tr>
@@ -19,12 +26,12 @@
     {% for produto in produtos %}
     <form action="{{url_for('deletar_do_carrinho', id=produto['codigo'])}}" method="POST">
         <tr class="produto" produto_id="{{produto['codigo']}}">
-            <td><input type="submit" value="X"></td>
+            <td><input type="submit" value="×"></td>
             <td class="codigo">{{produto['codigo']}}</td>
             <td class="nome">{{produto['nome']}}</td>
             <td class="preco">{{produto['preco']}}</td>
             <td class="quantidade">
-                <button type="button" onclick="decrementar({{produto['codigo']}})">-</button>
+                <button type="button" onclick="decrementar({{produto['codigo']}})">−</button>
                 <span>{{produto['quantidade']}}</span>
                 <button type="button" onclick="incrementar({{produto['codigo']}})">+</button>
             </td>
@@ -43,9 +50,6 @@
     </tr>
 </table>
 <br />
-{% if forma_de_pagamento %}
-<h3 style="text-align: center; width:100%;">Aguardando seu pagamento.</h3>
-<br />
 {% endif %}
 
 {% if forma_de_pagamento == 'pix' %}
@@ -58,7 +62,7 @@
 </div>
 {% else %}
 <form action="/carrinho" method="POST" style="width: 100%;justify-content: center;display: flex;flex-flow: column;">
-    <h3 style="text-align: center;">Forma de Pagamento</h3>
+    <h3 style="text-align: center; margin: 0">Forma de Pagamento</h3>
     <br />
     <div class="formas-de-pagamento" style="display: flex; gap: 15px; width: 100%; justify-content: center;">
         <div style="justify-content: center;align-items: center;display: flex;">

@@ -1,9 +1,11 @@
 <nav class="nav_menu">
 	<img src="{{ url_for('static', filename='images/logo.png') }}" alt="Organico's"  class="nav_menu_logo">
-	<ul class="nav_menu_list">
-		<li class="nav_menu_link_1"><a href="{{ url_for('menu_inicial') }}">Página Inicial</a></li>
-		<li class="nav_menu_link_2"><a href="{{ url_for('menu_cadastro') }}">Gerência</a></li>
-		<li class="nav_menu_link_3"><a href="{{ url_for('menu_vendas') }}">Loja</a></li>
-		<li class="nav_menu_link_4"><a href="{{ url_for('carrinho') }}">Carrinho</a></li>
-	</ul>
+	<div>
+		<ul class="nav_menu_list">
+			<li class="nav_menu_link_1"><a href="{{ url_for('menu_inicial') }}">Página Inicial</a></li>
+			<li class="nav_menu_link_2"><a href="{{ url_for('menu_cadastro') }}">Gerência</a></li>
+			<li class="nav_menu_link_3"><a href="{{ url_for('menu_vendas') }}">Loja</a></li>
+			<li class="nav_menu_link_4"><a href="{{ url_for('carrinho') }}">Carrinho</a></li>
+		</ul>
+	</div>
 </nav>
