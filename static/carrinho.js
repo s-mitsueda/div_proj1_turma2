@@ -55,4 +55,8 @@ function atualizar_preco_total(produto, preco_total) {
     produto.querySelector('.total').innerText = `R$ ${preco_total.toFixed(2).replace('.', ',')}`
 }
 
+window.onresize = () => {
+    document.getElementsByClassName('finalizar-compra')[0].style.width = parseFloat(document.getElementById('tabela-carrinho').getBoundingClientRect()['width']) + 'px' 
+};
+
 calcular_total()

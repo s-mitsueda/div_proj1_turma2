@@ -15,7 +15,9 @@
 <body>
 	{% include "nav.html" %}
 	<main class="{% block mainclass %}{% endblock %}">
+		<div class="container">
 		{% block main %}{% endblock %}
+		</div>
 	</main>
 </body>
 </html>
