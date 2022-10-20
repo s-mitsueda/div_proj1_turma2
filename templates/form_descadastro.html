@@ -1,5 +1,8 @@
 <form id="form_descadastro" action="/cadastro/descadastrar/" method="post">
-	<label for="select_descadastro">Produto a descadastrar: 
+	<fieldset class="fieldset_descadastro">
+		<legend>Marcar Produto Como Indisponível</legend>
+
+		<label for="select_descadastro">Nome do produto:</label>
 		<select name="id_produto" id="select_descadastro" required="True">
 			<option value="">—</option>
 			{% if produtos.empty == False %}
@@ -8,7 +11,7 @@
 			{% endfor %}
 			{% endif %}
 		</select>
-	</label>
 
-	<button>Enviar</button>
+		<button>Enviar</button>
+	</fieldset>
 </form>
