@@ -7,16 +7,15 @@
 <form action="/vendas/comprar" method="get">
 	<fieldset>
 		<legend>Carrinho de Compras</legend>
+
 		<label for="campo1">Nome:</label>
-		<input type="text" name="nome" id="campo1" required 
-		placeholder="Digite o nome do produto">
-		<br>
-		<br>
+		<input type="text" name="nome" id="campo1" required  placeholder="Digite o nome do produto">
+
 		<label for="campo2">Quantidade:</label>
 		<input type="number" min="1" max="100" name="qtd" id="campo2" required>
-		<br>
-		<br>
-		<input type="submit" value="Enviar">
+
+		<button>Enviar</button>
 	</fieldset>
 </form>
+{% include "table_vendas.html" %}
 {% endblock main %}

@@ -47,7 +47,7 @@ def descadastrar():
 
 @app.route("/vendas/")
 def menu_vendas():
-	return render_template("_menu_vendas.html")
+	return render_template("_menu_vendas.html", produtos=produtos[produtos["disponivel"] == True])
 
 @app.route("/vendas/comprar")
 def comprar():
