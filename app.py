@@ -1,4 +1,4 @@
-import decimal
+from decimal import Decimal
 from flask import Flask, render_template, redirect, request, url_for
 import pandas as pd
 import csv
@@ -9,12 +9,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 df_dtypes = {
 	"nome": "string",
 	"disponivel": "boolean",
-	"qtd_vendas": "int64"
-	}
+	"qtd_vendas": "int64"}
 df_converters = {
-	"valor": decimal.Decimal,
-	"valor_vendas": decimal.Decimal
-	}
+	"valor": Decimal,
+	"valor_vendas": Decimal}
 
 produtos = pd.read_csv("produtos.csv", dtype=df_dtypes, converters=df_converters)
 
@@ -26,8 +24,18 @@ def menu_inicial():
 def menu_cadastro():
 	return render_template("_menu_cadastro.html", produtos=produtos)
 
-@app.route("/cadastro/cadastrar/")
+@app.route("/cadastro/cadastrar")
 def cadastrar():
+	global produtos
+	n = pd.Series({
+		"nome": request.args.get("nome"),
+		"valor": request.args.get("valor", type=Decimal).quantize(Decimal("0.00")),
+		"disponivel": True,
+		"qtd_vendas": 0,
+		"valor_vendas": Decimal("0.00")})
+	produtos = pd.concat([produtos, n.to_frame().T], ignore_index=True)
+	produtos.to_csv("produtos.csv", index=False)
+
 	return redirect(url_for("menu_cadastro"))
 
 @app.route("/cadastro/descadastrar/", methods=["POST"])
