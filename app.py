@@ -47,7 +47,23 @@ def descadastrar():
 
 @app.route("/vendas/")
 def menu_vendas():
-	pass
+	return render_template("_menu_vendas.html")
+
+@app.route("/vendas/comprar")
+def comprar():
+	serie = pd.read_csv("carrinho_raissa.csv")
+
+	argumentos = request.args.to_dict()
+	result = pd.concat([serie, pd.Series(argumentos).to_frame().T])
+	result.to_csv("carrinho_raissa.csv", index=False)
+
+	return redirect(url_for("menu_vendas"))
+
+@app.route('/vendas/listar')
+def listar():
+	serie = pd.read_csv("carrinho_raissa.csv")
+
+	return serie.to_dict()
 
 @app.route("/carrinho", methods=['GET'])
 def carrinho():
