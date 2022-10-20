@@ -24,12 +24,12 @@ def menu_inicial():
 def menu_cadastro():
 	return render_template("_menu_cadastro.html", produtos=produtos)
 
-@app.route("/cadastro/cadastrar")
+@app.route("/cadastro/cadastrar/", methods=["POST"])
 def cadastrar():
 	global produtos
 	n = pd.Series({
-		"nome": request.args.get("nome"),
-		"valor": request.args.get("valor", type=Decimal).quantize(Decimal("0.00")),
+		"nome": request.form.get("nome"),
+		"valor": request.form.get("valor", type=Decimal).quantize(Decimal("0.00")),
 		"disponivel": True,
 		"qtd_vendas": 0,
 		"valor_vendas": Decimal("0.00")})

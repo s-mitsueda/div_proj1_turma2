@@ -1,0 +1,13 @@
+<form id="form_cadastro" action="/cadastro/cadastrar/" method="post">
+	<fieldset class="fieldset_cadastro">
+		<legend>Cadastrar Novo Produto</legend>
+
+		<label for="input_nome">Nome do produto:</label>
+		<input type="text" name="nome" id="input_nome" required>
+		
+		<label for="input_valor">Preço do produto:</label>
+		<input type="number" name="valor" id="input_valor" min="0.01" step="0.01" required>
+
+		<button>Enviar</button>
+	</fieldset>
+</form>
