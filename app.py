@@ -14,7 +14,7 @@ df_converters = {
 	"valor": Decimal,
 	"valor_vendas": Decimal}
 
-produtos = pd.read_csv("Produtos.csv", dtype=df_dtypes, converters=df_converters)
+produtos = pd.read_csv("produtos.csv", dtype=df_dtypes, converters=df_converters)
 
 @app.route("/")
 def menu_inicial():
