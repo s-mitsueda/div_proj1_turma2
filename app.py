@@ -3,6 +3,8 @@ from flask import Flask, render_template, redirect, request, url_for
 import pandas as pd
 import csv
 
+from secretstorage import Item
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -15,6 +17,52 @@ df_converters = {
 	"valor_vendas": Decimal}
 
 produtos = pd.read_csv("produtos.csv", dtype=df_dtypes, converters=df_converters)
+
+#Funções
+def formatar_preco(preco, quantidade):
+		total = preco * int(quantidade)
+
+		preco = f'{preco:.02f}'.replace('.', ',')
+		preco = f'R$ {preco}'
+
+		return preco, total
+
+
+def lerCarrinho(caminho):
+	produtos = []
+	with open(caminho, 'r', encoding="utf8") as file:
+		# LENDO COMO CSV
+		carrinho = csv.reader(file, delimiter=',')
+		
+		# PULANDO HEADER
+		next(carrinho, None)
+
+		# PASSANDO POR CADA LINHA DO ARQUIVO
+		for produto in carrinho:
+			# DEFININDO COLUNAS
+			codigo = produto[0]
+			nome = produto[1]
+			preco = float(produto[2])
+			quantidade = produto[3]
+
+			# FORMATANDO PREÇO
+			#preco, total_produto = formatar_preco(preco, quantidade)
+			total_produto = preco * int(quantidade)
+
+			# ADICIONANDO À LISTA DE PRODUTOS
+			produtos.append({
+				"codigo": codigo,
+				"nome": nome,
+				"preco": preco,
+				"quantidade": quantidade,
+				"total": total_produto 
+			})
+	return produtos
+
+
+
+
+#Rotas
 
 @app.route("/")
 def menu_inicial():
@@ -51,61 +99,43 @@ def menu_vendas():
 
 @app.route("/vendas/comprar")
 def comprar():
-	serie = pd.read_csv("carrinho_raissa.csv")
+	produtos = pd.read_csv("produtos.csv").set_index('nome')
+	carrinho = lerCarrinho(caminho = 'Carrinho.csv')
+	argumentos = request.args.to_dict() #Ler formulario (depois de apertar o botão enviar)
+	print(argumentos)
 
-	argumentos = request.args.to_dict()
-	result = pd.concat([serie, pd.Series(argumentos).to_frame().T])
-	result.to_csv("carrinho_raissa.csv", index=False)
+	nome = argumentos['nome'] #pega a chave nome do formulario
+	item = {
+		'codigo': str(len(carrinho)+1),
+		'nome': nome, 
+		'preco': str(produtos.loc[nome, 'valor']), 
+		'quantidade': argumentos['qtd'], 
+		}
+	print(item)
+	carrinho.append(item)
+	#criar um dataframe utilizando o carrinho, lista de dicionarios
+	#.drop -> remover coluna total
+	#to_csv -> transformar o dataframe para um csv chamado Carrinho.csv
+	#index = False -> escrever o csv sem o index
+	pd.DataFrame(carrinho)\
+	  .drop(columns='total')\
+	  .to_csv('Carrinho.csv',index=False)
 
 	return redirect(url_for("menu_vendas"))
 
 @app.route('/vendas/listar')
 def listar():
-	serie = pd.read_csv("carrinho_raissa.csv")
+	carrinho = lerCarrinho(caminho = 'Carrinho.csv')
 
-	return serie.to_dict()
+	return carrinho
 
 @app.route("/carrinho", methods=['GET'])
 def carrinho():
-	def formatar_preco(preco, quantidade):
-		total = preco * int(quantidade)
-
-		preco = f'{preco:.02f}'.replace('.', ',')
-		preco = f'R$ {preco}'
-
-		return preco, total
-
-	produtos = []
-
-	with open('Carrinho.csv', 'r', encoding="utf8") as file:
-		# LENDO COMO CSV
-		carrinho = csv.reader(file, delimiter=',')
-		
-		# PULANDO HEADER
-		next(carrinho, None)
-
-		# PASSANDO POR CADA LINHA DO ARQUIVO
-		for produto in carrinho:
-			# DEFININDO COLUNAS
-			codigo = produto[0]
-			nome = produto[1]
-			preco = float(produto[2])
-			quantidade = produto[3]
-
-			# FORMATANDO PREÇO
-			preco, total_produto = formatar_preco(preco, quantidade)
-
-			# ADICIONANDO À LISTA DE PRODUTOS
-			produtos.append({
-				"codigo": codigo,
-				"nome": nome,
-				"preco": preco,
-				"quantidade": quantidade,
-				"total": total_produto 
-			})
+	carrinho = lerCarrinho(caminho = 'Carrinho.csv')
+	print(carrinho)
 
 	#RENDERIZANDO PÁGINA
-	return render_template("carrinho.html", produtos=produtos, aguardando_pagamento=False)
+	return render_template("carrinho.html", produtos=carrinho, aguardando_pagamento=False)
 
 @app.route("/carrinho", methods=['POST'])
 def efetuar_compra():
